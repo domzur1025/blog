@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <title>{% block title %}{% endblock %}DomZur1025</title>
+
+        <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.2/css/bulma.min.css">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+        {{ form.media }}
+        <style>
+            nav.navbar {
+                height: 6rem !important;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06) !important;
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav class="navbar is-primary">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="/">
+                        <strong>DomZur1025 development blog</strong>
+                    </a>
+                    <span class="navbar-burger burger" data-target="navbarMenu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </div>
+
+                <div id="navbarMenu" class="navbar-menu ">
+                    <div class="navbar-end">
+                        <div class="navbar-item is-hoverable">
+                            <form method="get" action="{% url 'search' %}">
+                                <div class="control has-icons-left">
+                                    <input class="input is-rounded" name="query" type="text" placeholder="Search">
+                                    <span class="icon is-left">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <a href="{% url 'about' %}" class="navbar-item is-size-5 has-text-weight-semibold">
+                            About
+                        </a>
+                        <a href="{% url 'categories' %}" class="navbar-item is-size-5 has-text-weight-semibold">
+                            Categories
+                        </a>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'add' %}" class="navbar-item is-size-5 has-text-weight-semibold">
+                                Add
+                            </a>
+                            <a href="{% url 'drafts' %}" class="navbar-item is-size-5 has-text-weight-semibold">
+                                Drafts
+                            </a>
+                            <form action="{% url 'logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="navbar-item is-size-5 has-text-weight-semibold button is-text is-primary" style="height:100%; ">
+                                    Logout
+                                </button>
+                            </form>
+                            
+                        {% else %}
+                            <a href="{% url 'login' %}" class="navbar-item is-size-5 has-text-weight-semibold">
+                                Login
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <section class="section">
+            <div class="container ">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </section>
+
+        <footer class="footer has-background-primary">
+            <div class="content has-text-centered">
+                <p>
+                    Copyright (c) 2025 - DomZur1025
+                </p>
+            </div>
+        </footer>
+    </body>
+</html>

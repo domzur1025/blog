@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Login | {% endblock %}
+
+{% block content %}
+<section class="hero is-bold is-fullheight">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="title is-size-1">{{ status_code }} - {{ title }}</h1>
+            <p class="subtitle is-size-4">{{ message }}</p>
+            <a href="/" class="button is-danger is-large mt-4">Wróć na stronę główną</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

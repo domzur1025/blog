@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ category.title }} | {% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container">
+                <section class="section">
+                    <div class="columns">
+                        <div class="column content is-one-quarter"></div>
+                        <div class="column content">
+                            <h2>Drafts</h2>
+                            {% for post in posts %}
+                                <div class="content">
+                                    <a href="{% url 'edit' category_slug=post.category.slug slug=post.slug %}" class="has-text-primary-dark">
+                                        <p class="is-size-5">{{ post.title }}</p>
+                                    </a>
+                                </div>
+                            {% empty %}
+                                <div class="content">
+                                    <p>There is no drafts yet...</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+{% endblock %}
